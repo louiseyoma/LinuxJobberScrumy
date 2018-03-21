@@ -1,0 +1,9 @@
+.table {
+	border : 1px solid;
+	border-collapse: ;
+	width : 100%;
+	background-color: #F2C94C;
+}
+.th {
+	height: 100px;
+}

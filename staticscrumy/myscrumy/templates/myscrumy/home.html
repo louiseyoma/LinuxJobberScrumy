@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<head>
+  {% load staticfiles %}
+  <title>Devsforless</title>
+  <meta charset = "UTF-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/cs.css' %}">
+</head>
+
+<body>
+  <p><a href="{% url 'logout' %}">Logout</a></p>
+
+<div style="margin: 150px 150px 150px 150px">
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>Employee</th>
+      <th></th>
+      <th>Weekly Goals</th>
+      <th>Daily Goals</th>
+      <th>Verify</th>
+      <th>Done</th>
+    </tr>
+    <tr>
+      <th><a href="add_user">+</a></th>
+      <td>{{ first_user }}</td>
+      <th><a href="add_task">+</a></th>
+      <td>
+            {% for goal in wg %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in dg %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in ver %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in dn %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th><a href="#">+</a></th>
+      <td>{{ second_user }}</td>
+      <th><a href="add_task">+</a></th>
+      <td>
+            {% for goal in wg2 %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in dg2 %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in ver2 %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+            {% endfor %}
+      </td>
+      <td>
+        {% for goal in dn2 %}
+              <div>
+                {{ goal.task_id }}<br>
+                {{ goal.task }}<br>
+                {{ goal.time_of_status_change }}<br>
+                <a href="move_task/{{ goal.task_id }}">move</a>
+              </div><br>
+        {% endfor %}
+      </td>
+    </tr>
+  </table> 
+</div>
+
+</body>
+</html>
