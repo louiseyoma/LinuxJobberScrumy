@@ -9,7 +9,7 @@
 
 <head>
   {% load staticfiles %}
-  <title>Devsforless</title>
+  <title>MyScrumy</title>
   <meta charset = "UTF-8">
   <link rel="stylesheet" type="text/css" href="{% static 'css/cs.css' %}">
 </head>
@@ -39,6 +39,8 @@
                 {{ goal.task }}<br>
                 {{ goal.time_of_status_change }}<br>
                 <a href="move_task/{{ goal.task_id }}">move</a>
+                <a href="history/{{ goal.task_id }}">History</a>
+                <a href="delete/{{ goal.task_id }}">Delete</a>
               </div><br>
             {% endfor %}
       </td>
@@ -49,6 +51,8 @@
                 {{ goal.task }}<br>
                 {{ goal.time_of_status_change }}<br>
                 <a href="move_task/{{ goal.task_id }}">move</a>
+                <a href="history/{{ goal.task_id }}">History</a>
+                <a href="delete/{{ goal.task_id }}">Delete</a>
               </div><br>
             {% endfor %}
       </td>
@@ -59,6 +63,8 @@
                 {{ goal.task }}<br>
                 {{ goal.time_of_status_change }}<br>
                 <a href="move_task/{{ goal.task_id }}">move</a>
+                <a href="history/{{ goal.task_id }}">History</a>
+                <a href="delete/{{ goal.task_id }}">Delete</a>
               </div><br>
             {% endfor %}
       </td>
@@ -69,6 +75,8 @@
                 {{ goal.task }}<br>
                 {{ goal.time_of_status_change }}<br>
                 <a href="move_task/{{ goal.task_id }}">move</a>
+                <a href="history/{{ goal.task_id }}">History</a>
+                <a href="delete/{{ goal.task_id }}">Delete</a>
               </div><br>
             {% endfor %}
       </td>

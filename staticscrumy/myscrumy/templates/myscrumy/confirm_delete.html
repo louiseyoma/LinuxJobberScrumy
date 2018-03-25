@@ -1,0 +1,8 @@
+<p>Confirm Delete</p>
+
+<form method="post" action="">
+	{% csrf_token %}
+	<input type="radio" name="delete" value="yes">Yes<br>
+    <input type="radio" name="delete" value="no">No<br>
+	<input type="submit" name="submit" value="submit">
+</form>

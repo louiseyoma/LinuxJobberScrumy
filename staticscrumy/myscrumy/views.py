@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import TaskPostForm, AddUserForm, MoveTaskForm
-from .models import ScrumyUser, ScrumyGoals, Rolez, Status
+from .models import ScrumyUser, ScrumyGoals, Status
 import random
 from django.utils import timezone
 from django.urls import reverse
@@ -67,10 +67,12 @@ def add_task(request):
 			else:
 				taskpost.task_id = tc
 
-			a = Status.objects.get(status_id = 700)
+			a = Status.objects.get(pk = 4)
 			taskpost.status_id = a
 
 			taskpost.time_of_status_change = timezone.now()
+
+			taskpost.created_by = request.user
 
 			taskpost.save()
 			return HttpResponseRedirect('index')
@@ -78,77 +80,92 @@ def add_task(request):
 		form = TaskPostForm()
 	return render(request, 'myscrumy/add_task.html', {'form': form} ) 
 
-'''
-Working view for moving task
-def move_task(request):
-	
-	if request.method == "POST":
-		current_user = request.user
-		current_user_group = Group.objects.get(user = current_user)
-		form = MoveTaskForm(request.POST)
-		if form.is_valid():
-			movement = form.save(commit=False) #form details are saved in movement
-			x = ScrumyGoals.objects.get(user_id_id = movement.user_id_id , task_id = movement.task_id )#search database for record with userid and taskid = values supplied in from
-			x.status_id_id = movement.status_id #update statusid field in fetched record
-			if movement.status_id.id == 1 or movement.status_id.id == 2:
-				Regular = Group.objects.get(pk = 1)
-				if current_user_group.pk == Regular.pk:
-					return HttpResponseRedirect('move_task/no/permission')
-				else:
-					x.time_of_status_change = timezone.now()
-					x.save()
-					return HttpResponseRedirect('index')
-			else:
-				x.time_of_status_change = timezone.now()
-				x.save()
-				return HttpResponseRedirect('index')
+
+def history(request,task_id):
+	task = ScrumyGoals.objects.get(task_id = task_id)
+	if task.status_id_id == 1:
+		current_status = "Done"
+	elif task.status_id_id == 2:
+		current_status = "Verify"
+	elif task.status_id_id == 3:
+		current_status = "Daily Target"
 	else:
-		form = MoveTaskForm()
-		return render(request, 'myscrumy/move_task.html',{'form': form})
-'''
+		current_status = "Weekly Target"
+
+	if task.movement_track == 1:
+		previous_status = "Done"
+	elif task.movement_track == 2:
+		previous_status = "Verify"
+	elif task.movement_track == 3:
+		previous_status = "Daily Target"
+	elif task.movement_track == 4:
+		previous_status = "Weekly Target"
+	else:
+		previous_status = "Task has never been moved"
+
+	return HttpResponse("Last moved by: " + request.user.username + "<br>" + "from " + previous_status + " to " + current_status)
+
 
 def move_task(request,task_id):
 	
 	if request.method == "POST":
 		current_user = request.user
 		current_user_group = Group.objects.get(user = current_user)
-		x = ScrumyGoals.objects.get(task_id = task_id )#search database for record with userid and taskid = values supplied in from
-		#y = request.POST.get("status")
+		task = ScrumyGoals.objects.get(task_id = task_id )#search database for record with userid and taskid = values supplied in from
+		
+		previous_status = task.status_id_id
 		
 		if request.POST.get("status") == 'weekly target':
-			x.status_id_id = 4
-			x.time_of_status_change = timezone.now()
-			x.save()
+			task.status_id_id = 4
+			task.time_of_status_change = timezone.now()
+			task.moved_by = request.user.username
+			task.movement_track = previous_status
+			task.save()
 			return HttpResponseRedirect(reverse('index'))
 		elif request.POST.get("status") == 'daily target':
-			x.status_id_id = 3
-			x.time_of_status_change = timezone.now()
-			x.save()
+			task.status_id_id = 3
+			task.time_of_status_change = timezone.now()
+			task.moved_by = request.user.username
+			task.movement_track =  previous_status
+			task.save()
 			return HttpResponseRedirect(reverse('index'))
 		elif request.POST.get("status") == 'verify':
 			Regular = Group.objects.get(pk = 1)
 			if current_user_group.pk == Regular.pk:
 				return HttpResponseRedirect(reverse('no_permission'))
 			else:
-				x.status_id_id = 2
-				x.time_of_status_change = timezone.now()
-				x.save()
+				task.status_id_id = 2
+				task.time_of_status_change = timezone.now()
+				task.moved_by = request.user.username
+				task.movement_track = previous_status
+				task.save()
 				return HttpResponseRedirect(reverse('index'))
 		else:
 			Regular = Group.objects.get(pk = 1)
 			if current_user_group.pk == Regular.pk:
 				return HttpResponseRedirect(reverse('no_permission'))
 			else:
-				x.status_id_id = 1
-				x.time_of_status_change = timezone.now()
-				x.save()
+				task.status_id_id = 1
+				task.time_of_status_change = timezone.now()
+				task.moved_by = request.user.username
+				task.movement_track = previous_status
+				task.save()
 				return HttpResponseRedirect(reverse('index'))
 	else:
 		return render(request, 'myscrumy/move_task.html')
 
 
 def no_permission(request):
-	#p=Group.objects.get(name = 'Regular')
-	#current_user = request.user
-	#current_user_group = Group.objects.filter(user = current_user)
 	return render(request, "myscrumy/not_permited.html")
+
+def delete_task(request,task_id):
+
+	if request.method == "POST":
+		if request.POST.get("delete") == 'yes':
+			task_to_delete = ScrumyGoals.objects.get(task_id=task_id)
+			task_to_delete.delete()
+			return HttpResponseRedirect(reverse('index'))
+		else:
+			return HttpResponseRedirect(reverse('index'))	
+	else:
+		return render(request, "myscrumy/confirm_delete.html")
