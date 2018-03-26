@@ -1,0 +1,85 @@
+
+
+
+
+
+
+
+
+<table>
+	
+	<tr>
+		<th>Name</th>
+		<th></th>
+		<th>Weekly Target</th>
+		<th>Daily Target</th>
+		<th>Verify</th>
+		<th>Done</th>
+	</tr>
+
+{% for eachuser in u %}	
+
+	<tr>
+		<td>{{ eachuser.userName }}</td>
+		<td><a href="add_task">Create a new task</a></td>
+		<td>
+			{% for eachtask in w %}
+				{% if eachtask.user_id_id == eachuser.id %}
+					{{ eachtask.task_id }}<br>
+					{{ eachtask }}<br>
+					{{ eachtask.time_of_status_change }}<br>
+					<a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                	<a href="history/{{ eachtask.task_id }}">History</a><br>
+                	<a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+				{% endif %}
+			{% endfor %}
+		</td>
+		<td>
+			{% for eachtask in d %}
+				{% if eachtask.user_id_id == eachuser.id %}
+					{{ eachtask.task_id }}<br>
+					{{ eachtask }}<br>
+					{{ eachtask.time_of_status_change }}<br>
+					<a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                	<a href="history/{{ eachtask.task_id }}">History</a><br>
+                	<a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+				{% endif %}
+			{% endfor %}
+		</td>
+		<td>
+			{% for eachtask in v %}
+				{% if eachtask.user_id_id == eachuser.id %}
+					{{ eachtask.task_id }}<br>
+					{{ eachtask }}<br>
+					{{ eachtask.time_of_status_change }}<br>
+					<a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                	<a href="history/{{ eachtask.task_id }}">History</a><br>
+                	<a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+				{% endif %}
+			{% endfor %}
+		</td>
+		<td>
+			{% for eachtask in dn %}
+				{% if eachtask.user_id_id == eachuser.id %}
+					{{ eachtask.task_id }}<br>
+					{{ eachtask }}<br>
+					{{ eachtask.time_of_status_change }}<br>
+					<a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                	<a href="history/{{ eachtask.task_id }}">History</a><br>
+                	<a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+				{% endif %}
+			{% endfor %}
+		</td>
+	</tr>
+
+{% endfor %}	
+
+	<tr>
+		<td>
+			<a href="add_user">Add New User</a>
+		</td>
+	</tr>
+
+</table>
+
+

@@ -18,115 +18,82 @@
   <p><a href="{% url 'logout' %}">Logout</a></p>
 
 <div style="margin: 150px 150px 150px 150px">
-  <table class="table">
-    <tr>
-      <th></th>
-      <th>Employee</th>
-      <th></th>
-      <th>Weekly Goals</th>
-      <th>Daily Goals</th>
-      <th>Verify</th>
-      <th>Done</th>
-    </tr>
-    <tr>
-      <th><a href="add_user">+</a></th>
-      <td>{{ first_user }}</td>
-      <th><a href="add_task">+</a></th>
-      <td>
-            {% for goal in wg %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-                <a href="history/{{ goal.task_id }}">History</a>
-                <a href="delete/{{ goal.task_id }}">Delete</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in dg %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-                <a href="history/{{ goal.task_id }}">History</a>
-                <a href="delete/{{ goal.task_id }}">Delete</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in ver %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-                <a href="history/{{ goal.task_id }}">History</a>
-                <a href="delete/{{ goal.task_id }}">Delete</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in dn %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-                <a href="history/{{ goal.task_id }}">History</a>
-                <a href="delete/{{ goal.task_id }}">Delete</a>
-              </div><br>
-            {% endfor %}
-      </td>
-    </tr>
-    <tr>
-      <th><a href="#">+</a></th>
-      <td>{{ second_user }}</td>
-      <th><a href="add_task">+</a></th>
-      <td>
-            {% for goal in wg2 %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in dg2 %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in ver2 %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-              </div><br>
-            {% endfor %}
-      </td>
-      <td>
-        {% for goal in dn2 %}
-              <div>
-                {{ goal.task_id }}<br>
-                {{ goal.task }}<br>
-                {{ goal.time_of_status_change }}<br>
-                <a href="move_task/{{ goal.task_id }}">move</a>
-              </div><br>
-        {% endfor %}
-      </td>
-    </tr>
-  </table> 
+<table>
+  
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th>Weekly Target</th>
+    <th>Daily Target</th>
+    <th>Verify</th>
+    <th>Done</th>
+  </tr>
+
+{% for eachuser in u %} 
+
+  <tr>
+    <td>{{ eachuser.userName }}</td>
+    <td><a href="add_task">Create a new task</a></td>
+    <td>
+      {% for eachtask in w %}
+        {% if eachtask.user_id_id == eachuser.id %}
+          {{ eachtask.task_id }}<br>
+          {{ eachtask }}<br>
+          {{ eachtask.time_of_status_change }}<br>
+          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                  <a href="history/{{ eachtask.task_id }}">History</a><br>
+                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+    <td>
+      {% for eachtask in d %}
+        {% if eachtask.user_id_id == eachuser.id %}
+          {{ eachtask.task_id }}<br>
+          {{ eachtask }}<br>
+          {{ eachtask.time_of_status_change }}<br>
+          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                  <a href="history/{{ eachtask.task_id }}">History</a><br>
+                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+    <td>
+      {% for eachtask in v %}
+        {% if eachtask.user_id_id == eachuser.id %}
+          {{ eachtask.task_id }}<br>
+          {{ eachtask }}<br>
+          {{ eachtask.time_of_status_change }}<br>
+          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                  <a href="history/{{ eachtask.task_id }}">History</a><br>
+                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+    <td>
+      {% for eachtask in dn %}
+        {% if eachtask.user_id_id == eachuser.id %}
+          {{ eachtask.task_id }}<br>
+          {{ eachtask }}<br>
+          {{ eachtask.time_of_status_change }}<br>
+          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+                  <a href="history/{{ eachtask.task_id }}">History</a><br>
+                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+        {% endif %}
+      {% endfor %}
+    </td>
+  </tr>
+
+{% endfor %}  
+
+  <tr>
+    <td>
+      <a href="add_user">Add New User</a>
+    </td>
+  </tr>
+
+</table>
+
 </div>
 
 </body>
