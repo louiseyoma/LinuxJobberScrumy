@@ -15,4 +15,9 @@ class AddUserForm(ModelForm):
 class MoveTaskForm(ModelForm):
 	class Meta:
 		model = ScrumyGoals
-		fields = ['status_id', 'task_id', 'user_id',]
+		fields = ['status_id', 'task_id', 'user_id']
+
+class AssignTaskOwnerForm(ModelForm):
+	class Meta:
+		model = ScrumyUser
+		fields = ['userName']

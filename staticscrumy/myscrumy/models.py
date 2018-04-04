@@ -13,7 +13,6 @@ class Status(models.Model):
 
 class ScrumyUser(models.Model):
 	userName = models.CharField(max_length=100)
-	password = models.CharField(max_length=100, default="linuxjobber")
 
 	def __str__(self):
 		return self.userName
@@ -28,6 +27,18 @@ class ScrumyGoals(models.Model):
 	moved_by = models.CharField(max_length=50, default="not been moved")
 	created_by = models.CharField(max_length=50, null=False)
 	movement_track = models.IntegerField(default=1234, null=False)
+	owner = models.CharField(max_length=50, default="unassigned")
 
 	def __str__(self):
 		return self.task
+
+'''
+class ScrumyHistory(models.Model):
+	moved_by = models.CharField(max_length=50, default="not been moved")
+	created_by = models.CharField(max_length=50, null=False)
+	moved_from = models.IntegerField(default=1234, null=False)
+	moved_to = models.IntegerField(default=1234, null=False)
+	time_of_status_change = models.DateTimeField(default=timezone.now, null=False)
+	task_id = models.ForeignKey(ScrumyGoals, on_delete = models.PROTECT)
+	def __str__(self):
+		return self.userName'''

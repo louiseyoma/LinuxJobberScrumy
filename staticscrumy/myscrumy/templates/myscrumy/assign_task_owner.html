@@ -19,10 +19,10 @@
   <h3>linuxjobber</h3>
 
   <div>
-    <form method="post" action="add_task">
+    <form method="post" action="">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Add Task">
+      <input type="submit" value="Assign">
     </form>
   </div>
 </body>

@@ -10,5 +10,6 @@ urlpatterns = [
     path('delete/<int:task_id>',views.delete_task, name = 'delete_task'),
     path('history/<int:task_id>',views.history, name = 'history'),
     path('move_task/<int:task_id>',views.move_task, name = 'move_task'),
+    path('assign/owner/<int:task_id>',views.assign_task_owner, name = 'assign_owner'),
     re_path(r'^move_task/no/permission$',views.no_permission, name = 'no_permission'),
 ]

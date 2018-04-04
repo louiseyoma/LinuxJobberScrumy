@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang = "en">
 
-
+{% load static %}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
 <head>
-  {% load staticfiles %}
+  
   <title>MyScrumy</title>
   <meta charset = "UTF-8">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/cs.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'myscrumy/css/sc.css' %}">
 </head>
 
 <body>
-  <p><a href="{% url 'logout' %}">Logout</a></p>
+  
+  <h3>linuxjobber</h3>
 
-<div style="margin: 150px 150px 150px 150px">
+  <a id="logout" href="{% url 'logout' %}">Logout</a>
+
+<div style="margin: 20px 20px 20px 20px">
 <table>
   
   <tr>
@@ -37,48 +40,56 @@
     <td>
       {% for eachtask in w %}
         {% if eachtask.user_id_id == eachuser.id %}
-          {{ eachtask.task_id }}<br>
-          {{ eachtask }}<br>
-          {{ eachtask.time_of_status_change }}<br>
-          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
-                  <a href="history/{{ eachtask.task_id }}">History</a><br>
-                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+          <div id="box">
+            {{ eachtask.task_id }}<br>
+            {{ eachtask }}<br>
+            <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+            <a href="history/{{ eachtask.task_id }}">History</a><br>
+            <a id="delete" href="delete/{{ eachtask.task_id }}">Delete</a><br>
+            <small>Owner: </small><em>{{ eachtask.owner }}</em><a href="assign/owner/{{ eachtask.task_id }}"> <em>change</em></a>
+          </div>
         {% endif %}
       {% endfor %}
     </td>
     <td>
       {% for eachtask in d %}
         {% if eachtask.user_id_id == eachuser.id %}
-          {{ eachtask.task_id }}<br>
-          {{ eachtask }}<br>
-          {{ eachtask.time_of_status_change }}<br>
-          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
-                  <a href="history/{{ eachtask.task_id }}">History</a><br>
-                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+          <div id="box">
+            {{ eachtask.task_id }}<br>
+            {{ eachtask }}<br>
+            <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+            <a href="history/{{ eachtask.task_id }}">History</a><br>
+            <a id="delete" href="delete/{{ eachtask.task_id }}">Delete</a><br>
+            <small>Owner: </small><em>{{ eachtask.owner }}</em><a href="assign/owner/{{ eachtask.task_id }}"> <em>change</em></a>
+          </div id="box">
         {% endif %}
       {% endfor %}
     </td>
     <td>
       {% for eachtask in v %}
         {% if eachtask.user_id_id == eachuser.id %}
-          {{ eachtask.task_id }}<br>
-          {{ eachtask }}<br>
-          {{ eachtask.time_of_status_change }}<br>
-          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
-                  <a href="history/{{ eachtask.task_id }}">History</a><br>
-                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+          <div id="box">
+            {{ eachtask.task_id }}<br>
+            {{ eachtask }}<br>
+            <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+            <a href="history/{{ eachtask.task_id }}">History</a><br>
+            <a id="delete" href="delete/{{ eachtask.task_id }}">Delete</a><br>
+            <small>Owner: </small><em>{{ eachtask.owner }}</em><a href="assign/owner/{{ eachtask.task_id }}"> <em>change</em></a>
+          </div id="box">
         {% endif %}
       {% endfor %}
     </td>
     <td>
       {% for eachtask in dn %}
         {% if eachtask.user_id_id == eachuser.id %}
-          {{ eachtask.task_id }}<br>
-          {{ eachtask }}<br>
-          {{ eachtask.time_of_status_change }}<br>
-          <a href="move_task/{{ eachtask.task_id }}">move</a><br>
-                  <a href="history/{{ eachtask.task_id }}">History</a><br>
-                  <a href="delete/{{ eachtask.task_id }}">Delete</a><br>
+          <div id="box">
+            {{ eachtask.task_id }}<br>
+            {{ eachtask }}<br>
+            <a href="move_task/{{ eachtask.task_id }}">move</a><br>
+            <a href="history/{{ eachtask.task_id }}">History</a><br>
+            <a id="delete" href="delete/{{ eachtask.task_id }}">Delete</a><br>
+            <small>Owner: </small><em>{{ eachtask.owner }}</em><a href="assign/owner/{{ eachtask.task_id }}"> <em>change</em></a>
+          </div id="box">
         {% endif %}
       {% endfor %}
     </td>
